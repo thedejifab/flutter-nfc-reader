@@ -12,10 +12,10 @@ enum NFCStatus {
 }
 
 class NfcData {
-  final String? id;
-  final String? content;
-  final String? error;
-  final String? statusMapper;
+  final String id;
+  final String content;
+  final String error;
+  final String statusMapper;
 
   NFCStatus status = NFCStatus.none;
 
@@ -75,13 +75,13 @@ class FlutterNfcReader {
 
   static Future<void> stop() => _channel.invokeMethod('NfcStop');
 
-  static Future<NfcData> read({String? instruction}) async {
+  static Future<NfcData> read({String instruction}) async {
     final Map data = await _callRead(instruction: instruction);
     final NfcData result = NfcData.fromMap(data);
     return result;
   }
 
-  static Stream<NfcData> onTagDiscovered({String? instruction}) {
+  static Stream<NfcData> onTagDiscovered({String instruction}) {
     if (Platform.isIOS) {
       _callRead(instruction: instruction);
     }
